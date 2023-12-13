@@ -1,5 +1,12 @@
+# Use the official Tomcat base image
 FROM tomcat:latest
-COPY petclinic.war /usr/local/tomcat/webapps/
-EXPOSE 8070
-ADD target/petclinic.war petclinic.war
-ENTRYPOINT ["java","-jar","/petclinic.war"]
+
+# Copy the WAR file into the Tomcat webapps directory
+COPY target/petclinic.war /usr/local/tomcat/webapps/petclinic.war
+
+# Expose the port that Tomcat will use
+EXPOSE 8080
+
+# The default command to run when starting the container will start Tomcat
+CMD ["catalina.sh", "run"]
+
